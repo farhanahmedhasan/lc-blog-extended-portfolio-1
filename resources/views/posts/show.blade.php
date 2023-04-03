@@ -52,23 +52,30 @@
                 </div>
 
                 {{--Comment Section--}}
-                <section class="col-span-12 !mt-12 space-y-8">
-                    <form method="POST" action="#" class="border border-gray-200 p-6 rounded-xl">
-                        @csrf
+                    <section class="col-span-12 !mt-12 space-y-8">
+                        @auth
+                            <form method="POST" action="/posts/{{ $post->slug }}/comments" class="border border-gray-200 p-6 rounded-xl">
+                                @csrf
 
-                        <header class="flex items-center">
-                            <img class="block rounded-full" src="https://i.pravatar.cc/40?u={{$post->author->id}}" width="40" height="40" alt="">
-                            <h3 class="ml-3">Want to participate</h3>
-                        </header>
+                                <header class="flex items-center">
+                                    <img class="block rounded-full" src="https://i.pravatar.cc/40?u={{auth()->user()->id}}" width="40" height="40" alt="">
+                                    <h3 class="ml-3">Want to participate</h3>
+                                </header>
 
-                        <div class="mt-6">
-                            <textarea name="body" id="body" rows="5" class="border border-gray-200 w-full p-4 text-sm focus:outline-none focus:ring " placeholder="Want anything to say?"></textarea>
-                        </div>
+                                <div class="mt-6">
+                                    <textarea name="body" id="body" rows="5" class="border border-gray-200 w-full p-4 text-sm focus:outline-none focus:ring " placeholder="Want anything to say?"></textarea>
+                                </div>
 
-                        <div class="flex justify-end mt-6">
-                            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white uppercase font-semibold text-xs py-2 px-10 rounded-full">Post</button>
-                        </div>
-                    </form>
+                                <div class="flex justify-end mt-6">
+                                    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white uppercase font-semibold text-xs py-2 px-10 rounded-full">Post</button>
+                                </div>
+                            </form>
+                        @else
+                            <p class="semi-bold">
+                                <a href="/register" class="cursor-pointer hover:underline">Register</a> Or
+                                <a href="/login" class="cursor-pointer hover:underline">Login</a> to leave a comment.
+                            </p>
+                        @endauth
 
                     @foreach($post->comments as $comment)
                         <x-post-comment :comment="$comment"/>
