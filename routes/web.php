@@ -6,7 +6,10 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/ping', function(){
+Route::post('/newsletter', function(){
+
+    request()->validate(['email' => 'required|email']);
+
     $mailchimp = new \MailchimpMarketing\ApiClient();
 
     $mailchimp->setConfig([
@@ -14,12 +17,16 @@ Route::get('/ping', function(){
         'server' => 'us8'
     ]);
 
-    $response = $mailchimp->lists->addListMember("c4ee03525e",[
-        "email_address" => "azhasandjmamunxyz2015@gmail.com",
-        "status" => "subscribed",
-    ]);
-    
-    dd($response);
+	try {
+		$response = $mailchimp->lists->addListMember("c4ee03525e",[
+			"email_address" => request('email'),
+			"status" => "subscribed",
+    	]);
+	} catch (\Exception $e) {
+    	return redirect('/')->with('failed', 'We could not add your email to our newsletter');
+	};
+
+    return redirect('/')->with('success', 'You are now signed up for our newsletter');
 });
 
 Route::get('/', [PostController::class, 'index'])->name('home');
