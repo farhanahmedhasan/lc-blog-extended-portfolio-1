@@ -24,4 +24,21 @@ class PostController extends Controller
     {
         return view('posts.create');
     }
+
+    public function Store()
+    {
+        $attributes = request()->validate([
+            'title' => 'required | min:3 | max:255',
+            'slug' => 'required | min:3 | max:255 | unique:posts,slug',
+            'excerpt' => 'required',
+            'body' => 'required',
+            'category_id' => ['required', 'exists:categories,id'],
+        ]);
+
+        $attributes['user_id'] = auth()->id();
+
+        Post::Create($attributes);
+
+        return redirect('/');
+    }
 }
