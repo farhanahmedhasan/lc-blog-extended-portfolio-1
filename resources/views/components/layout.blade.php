@@ -28,12 +28,23 @@
             @endguest
 
             @auth
-                <span class="text-xs font-bold uppercase">Welcome {{auth()->user()->name}}</span>
+                <x-dropdown>
+                    <x-slot name="trigger">
+                        <button class="text-xs font-bold uppercase">Welcome {{auth()->user()->name}}</button>
+                    </x-slot>
+                    
+                    <x-dropdown-item href="/admin/dashboard">Dashboard</x-dropdown-item>
+                    <x-dropdown-item href="/admin/posts/create" :active="request()->is('admin/posts/create')">
+                        New Post
+                    </x-dropdown-item>
+                    <x-dropdown-item href="#" x-data="{}" @click.prevent="document.querySelector('#logout-form').submit()">Logout</x-dropdown-item>
 
-                    <form action="/logout" method="post" class="ml-6">
+                    <form id="logout-form" action="/logout" method="post" class="hidden">
                         @csrf
                         <button class="text-sm text-blue-500 font-semibold" type="submit">Logout</button>
                     </form>
+                </x-dropdown>
+
             @endauth
 
             <a href="#newsletter" class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
