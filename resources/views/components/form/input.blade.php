@@ -1,4 +1,4 @@
-@props(['name', 'type'=> 'text'])
+@props(['name', 'type'=> 'text', 'value'=>""])
 
 <x-form.inputWrapper>
 	<x-form.label name="{{$name}}"/>
@@ -8,8 +8,8 @@
 		type='{{$type}}' 
 		name='{{$name}}'
 		id='{{$name}}'
-		value="{{old('$name')}}"
-		required />
+		value="{{$value ? $value : old($name)}}"
+		/>
 
 	<x-form.error name="{{$name}}"/>
 </x-form.inputWrapper>
