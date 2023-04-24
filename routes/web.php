@@ -23,9 +23,9 @@ Route::post('/logout', [SessionController::class, 'destroy'])->middleware('auth'
 Route::post('/newsletter', NewsletterController::class);
 
 //Admin Routes
-Route::get('/admin/posts', [AdminPostController::class, 'index'])->middleware('admin');
-Route::get('/admin/posts/create', [AdminPostController::class, 'create'])->middleware('admin');
-Route::post('/admin/posts', [AdminPostController::class, 'store'])->middleware('admin');
-Route::get('admin/posts/{post:slug}/edit', [AdminPostController::class, 'edit'])->middleware('admin');
-Route::patch('admin/posts/{post:slug}', [AdminPostController::class, 'update'])->middleware('admin');
-Route::delete('admin/posts/{post:slug}', [AdminPostController::class, 'destroy'])->middleware('admin');
+Route::get('/admin/posts', [AdminPostController::class, 'index'])->middleware('can:admin');
+Route::get('/admin/posts/create', [AdminPostController::class, 'create'])->middleware('can:admin');
+Route::post('/admin/posts', [AdminPostController::class, 'store'])->middleware('can:admin');
+Route::get('admin/posts/{post:slug}/edit', [AdminPostController::class, 'edit'])->middleware('can:admin');
+Route::patch('admin/posts/{post:slug}', [AdminPostController::class, 'update'])->middleware('can:admin');
+Route::delete('admin/posts/{post:slug}', [AdminPostController::class, 'destroy'])->middleware('can:admin');
