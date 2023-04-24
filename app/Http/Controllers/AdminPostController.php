@@ -50,7 +50,9 @@ class AdminPostController extends Controller
     }
 
     public function destroy(Post $post){
-        Storage::delete($post->thumbnail);
+        if(isset($attributes['thumbnail'])){
+            Storage::delete($post->thumbnail);
+        }
         $post->delete();
 
         return back()->with('success', 'Post Deleted!');
