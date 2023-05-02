@@ -4,7 +4,7 @@
     {{$attributes->merge(['class' => "transition-colors duration-300 hover:bg-gray-100 border border-black border-opacity-0 hover:border-opacity-5 rounded-xl"])}}>
     <div class="py-6 px-5">
         <div>
-            <img src={{!$post->thumbnail ? "/images/illustration-1.png" : "/storage/".$post->thumbnail}} alt="Blog Post illustration" class="rounded-xl">
+            <img src={{!$post->thumbnail ? "/images/illustration-1.png" : "/storage/".$post->thumbnail}} alt="Blog-post-illustration" class="rounded-xl">
         </div>
 
         <div class="mt-8 flex flex-col justify-between">
@@ -16,7 +16,7 @@
                         <div class="text-blue-400">
                             <x-icon name="eye" />
                         </div>
-                        <p class="text-sm">{{$post->count}}</p>
+                        <p class="text-sm">{{$post->view_count}}</p>
                     </div>
                 </div>
 

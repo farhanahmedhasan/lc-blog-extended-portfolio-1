@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('thumbnail')->nullable();
             $table->text('excerpt');
             $table->text('body');
-            $table->bigInteger('count')->default('0');
+            $table->bigInteger('view_count')->default('0');
+            $table->bigInteger('like_count')->default('0');
             $table->timestamps();
         });
     }

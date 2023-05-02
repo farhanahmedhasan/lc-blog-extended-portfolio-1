@@ -4,7 +4,7 @@
         <main class="max-w-6xl mx-auto mt-10 lg:mt-20 space-y-6">
             <article class="max-w-4xl mx-auto lg:grid lg:grid-cols-12 gap-x-10">
                 <div class="col-span-4 lg:text-center lg:pt-14 mb-10">
-                    <img src={{!$post->thumbnail ? "/images/illustration-1.png" : "/storage/".$post->thumbnail}} alt="" class="rounded-xl">
+                    <img src={{!$post->thumbnail ? "/images/illustration-1.png" : "/storage/".$post->thumbnail}} alt="" class="rounded-xl" />
 
                     <p class="mt-4 block text-gray-400 text-xs">
                         Published <time>{{$post->created_at->diffForHumans()}}</time>
@@ -24,13 +24,17 @@
                             <div class="text-blue-400">
                                 <x-icon name="eye" />
                             </div>
-                            <p class="text-sm">{{$post->count}}</p>
+
+                            <p class="text-sm">{{$post->view_count}}</p>
                         </div>
 
-                        <div class="flex items-center ">
-                            <x-icon name="heart" />
-                            <p>0</p>
-                        </div>
+                        @auth()
+                            <div class="flex items-center ">
+                                <x-icon name="heart" />
+                                <p>0</p>
+                            </div>
+                        @endauth
+
                     </div>
                 </div>
 

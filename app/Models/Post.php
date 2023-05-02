@@ -60,7 +60,7 @@ class Post extends Model
     }
 
     public function incrementViewCount() {
-        $this->count++;
+        $this->view_count++;
         return $this->save();
     }
 
