@@ -2,7 +2,7 @@
 
 <title>Laravel From Scratch Blog</title>
 <link rel="preconnect" href="https://fonts.gstatic.com">
-@vite('resources/css/app.css')
+@vite(['resources/css/app.css',"resources/scss/app.scss"])
 <style>
     html{
         scroll-behavior: smooth;
@@ -32,7 +32,7 @@
                     <x-slot name="trigger">
                         <button class="text-xs font-bold uppercase">Welcome {{auth()->user()->name}}</button>
                     </x-slot>
-                    
+
                     @can('admin')
                         <x-dropdown-item href="/admin/posts" :active="request()->is('admin/posts')">All Posts</x-dropdown-item>
                         <x-dropdown-item href="/admin/posts/create" :active="request()->is('admin/posts/create')">New Post</x-dropdown-item>

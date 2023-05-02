@@ -4,7 +4,7 @@
         <button class="flex lg:inline-flex py-2 pl-3 pr-9 text-left text-sm font-semibold w-full lg:w-32">
             {{isset($currentCategory) ? ucwords($currentCategory->name) : "Categories"}}
 
-            <x-icon name="down-arrow" class="absolute pointer-events-none" style="right: 12px;" />
+            <x-icon name="down-arrow" class="absolute pointer-events-none" style="right: -12px;" />
         </button>
     </x-slot>
 
