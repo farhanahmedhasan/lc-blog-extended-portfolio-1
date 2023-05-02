@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\View\View;
 
 class PostController extends Controller
@@ -17,7 +18,11 @@ class PostController extends Controller
 
     public function show(Post $post): View
     {
-        $post->incrementViewCount();
+        if(!Cookie::get($post->id)){
+            Cookie::queue($post->id, 1, 120);
+            $post->incrementViewCount();
+        }
+
         return view('posts.show', ['post'=> $post]);
     }
 }
