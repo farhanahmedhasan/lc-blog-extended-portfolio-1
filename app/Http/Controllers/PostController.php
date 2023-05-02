@@ -17,6 +17,7 @@ class PostController extends Controller
 
     public function show(Post $post): View
     {
+        $post->incrementViewCount();
         return view('posts.show', ['post'=> $post]);
     }
 }
