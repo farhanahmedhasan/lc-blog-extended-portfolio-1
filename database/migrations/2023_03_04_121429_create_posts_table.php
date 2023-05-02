@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('thumbnail')->nullable();
             $table->text('excerpt');
             $table->text('body');
+            $table->bigInteger('count')->default('0');
             $table->timestamps();
         });
     }
